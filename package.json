@@ -1,0 +1,43 @@
+{
+  "name": "givit",
+  "version": "0.0.0",
+  "description": "make http requests",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "tape ./test/*.test.js",
+    "jshint": "jshint -c ./.jshintrc --exclude-path .gitignore .",
+    "coverage": "istanbul cover tape ./test/*.test.js && istanbul check-coverage --statements 95 --functions 95 --lines 95 --branches 95"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/foundersandcoders/givit.git"
+  },
+  "keywords": [
+    "request",
+    "hyperquest",
+    "givit",
+    "http"
+  ],
+  "author": "William Fisher",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/foundersandcoders/givit/issues"
+  },
+  "homepage": "https://github.com/foundersandcoders/givit",
+  "dependencies": {
+    "hyperquest": "^1.2.0"
+  },
+  "pre-commit": [
+    "jshint",
+    "coverage"
+  ],
+  "devDependencies": {
+    "istanbul": "^0.3.13",
+    "jshint": "^2.7.0",
+    "pre-commit": "^1.0.7",
+    "tape": "^4.0.0"
+  }
+}
