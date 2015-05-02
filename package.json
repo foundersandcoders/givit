@@ -1,6 +1,6 @@
 {
   "name": "givit",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "make http requests",
   "main": "index.js",
   "directories": {

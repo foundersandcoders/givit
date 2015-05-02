@@ -12,7 +12,7 @@ var opts = {
 request(opts, function (e, r) {
 
   if (r.statusCode === 200) {
-    console.log("Woop de doop");
+    console.log("Woop de doop:", r.body);
   }
 });
 ```
