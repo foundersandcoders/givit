@@ -10,6 +10,7 @@ var server = http.createServer(function (req, res) {
 
   if (req.method === "GET") {
 
+    res.writeHead(200);
     res.write(JSON.stringify({meth: "GET", mess: "cool"}));
     res.end();
   } else if (req.method === "POST") {
@@ -19,7 +20,7 @@ var server = http.createServer(function (req, res) {
       d += ch;
     });
     req.on("end", function () {
-
+      res.writeHead(302);
       res.write(JSON.stringify({meth: "POST", mess: "wow", data: d}));
       res.end();
     });
@@ -46,8 +47,8 @@ server.listen(7777, function () {
 
     request(opts, function (e, res) {
 
-      var returned = res;
-
+      var returned = res.body;
+      t.equals(res.statusCode, 200, "200 returned");
       t.equals(returned.meth, "GET");
       t.equals(returned.mess, "cool");
       t.end();
@@ -66,7 +67,8 @@ server.listen(7777, function () {
 
     request(opts, function (e, res) {
 
-      var returned = res;
+      var returned = res.body;
+      t.equals(res.statusCode, 302, "302 returned");
       t.equals(returned.meth, "POST");
       t.equals(returned.mess, "wow");
       t.equals(JSON.parse(returned.data).name, "wil");
@@ -83,7 +85,7 @@ server.listen(7777, function () {
 
     request(opts, function (e, res) {
 
-      var returned = res;
+      var returned = res.body;
       t.equals(returned.meth, "POST");
       t.equals(returned.mess, "wow");
       t.end();
@@ -100,7 +102,7 @@ server.listen(7777, function () {
 
     request(opts, function (e, res) {
 
-      var returned = res;
+      var returned = res.body;
       t.equals(returned.meth, "PUT");
       t.equals(returned.mess, "woo");
       t.end();
@@ -116,7 +118,7 @@ server.listen(7777, function () {
 
     request(opts, function (e, res) {
 
-      var returned = res;
+      var returned = res.body;
       t.equals(returned.meth, "DELETE");
       t.equals(returned.mess, "no");
       t.end();

@@ -7,6 +7,7 @@ var hyperquest = require("hyperquest");
 function request (opts, cb) {
 
   var d = "";
+  var returned = {};
 
   if (!opts.method || !opts.uri) {
     return cb("usage: request(opts, cb)");
@@ -23,11 +24,16 @@ function request (opts, cb) {
     });
     re.on("end", function () {
 
-      return cb(null, JSON.parse(d));
+      returned.body = JSON.parse(d);
+      return cb(null, returned);
     });
 
   });
 
+  r.on("response", function (re) {
+
+    returned.statusCode = re.statusCode;
+  });
   if (opts.method === "PUT" || opts.method === "POST") {
 
     if (opts.body) {
