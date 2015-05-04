@@ -32,6 +32,7 @@ function request (opts, cb) {
 
   r.on("response", function (re) {
 
+    returned.headers = re.headers;
     returned.statusCode = re.statusCode;
   });
   if (opts.method === "PUT" || opts.method === "POST") {
